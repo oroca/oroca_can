@@ -35,6 +35,7 @@ class BluetoothSpeaker: public Stream
         int read(void);
         size_t write(uint8_t c);
         void flush();
+		void remoteControl(uint8_t tl, uint8_t key_code, uint8_t key_state);
         void end(void);
 
     private:

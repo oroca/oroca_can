@@ -226,6 +226,11 @@ void BluetoothSpeaker::flush()
 
 }
 
+void BluetoothSpeaker::remoteControl(uint8_t tl, uint8_t key_code, uint8_t key_state)
+{
+	av_remote_control(tl, key_code, key_state);
+}
+
 void BluetoothSpeaker::end()
 {
     _stop_bt();

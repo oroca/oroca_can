@@ -34,6 +34,12 @@ void bt_app_a2d_data_cb(const uint8_t *data, uint32_t len);
  */
 void bt_app_rc_ct_cb(esp_avrc_ct_cb_event_t event, esp_avrc_ct_cb_param_t *param);
 
+/**
+ * @brief     function for AVRCP remote controller
+ */
+void av_remote_control(uint8_t tl, uint8_t key_code, uint8_t key_state);
+
+
 #endif /* __BT_APP_AV_H__*/
 /*
 #ifdef __cplusplus

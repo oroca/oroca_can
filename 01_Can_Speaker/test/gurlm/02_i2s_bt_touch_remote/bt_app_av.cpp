@@ -58,6 +58,8 @@ static uint32_t m_pkt_cnt = 0;
 static esp_a2d_audio_state_t m_audio_state = ESP_A2D_AUDIO_STATE_STOPPED;
 static const char *m_a2d_conn_state_str[] = {"Disconnected", "Connecting", "Connected", "Disconnecting"};
 static const char *m_a2d_audio_state_str[] = {"Suspended", "Stopped", "Started"};
+static bool avr_ct_connetion_state = false;
+
 
 /* callback for A2DP sink */
 void bt_app_a2d_cb(esp_a2d_cb_event_t event, esp_a2d_cb_param_t *param)
@@ -100,6 +102,7 @@ void bt_app_rc_ct_cb(esp_avrc_ct_cb_event_t event, esp_avrc_ct_cb_param_t *param
     case ESP_AVRC_CT_METADATA_RSP_EVT:
         bt_app_alloc_meta_buffer(param);
     case ESP_AVRC_CT_CONNECTION_STATE_EVT:
+		 Serial.println("bt_app_rc_ct_cb ESP_AVRC_CT_CONNECTION_STATE_EVT ");
     case ESP_AVRC_CT_PASSTHROUGH_RSP_EVT:
     case ESP_AVRC_CT_CHANGE_NOTIFY_EVT:
     case ESP_AVRC_CT_REMOTE_FEATURES_EVT: {
@@ -187,6 +190,7 @@ static void bt_av_hdl_avrc_evt(uint16_t event, void *p_param)
     switch (event) {
     case ESP_AVRC_CT_CONNECTION_STATE_EVT: {
         uint8_t *bda = rc->conn_stat.remote_bda;
+		avr_ct_connetion_state = true ;
         Serial.println("AVRC conn_state evt: state ");
 
         if (rc->conn_stat.connected) {
@@ -217,3 +221,16 @@ static void bt_av_hdl_avrc_evt(uint16_t event, void *p_param)
         break;
     }
 }
+
+void av_remote_control(uint8_t tl, uint8_t key_code, uint8_t key_state)
+{
+
+    Serial.println("remoteControl");
+    if (avr_ct_connetion_state) {
+		Serial.println("remoteControl send data");
+		esp_avrc_ct_send_passthrough_cmd(tl, key_code, key_state);
+    }
+}
+
+
+

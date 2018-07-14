@@ -68,18 +68,18 @@ void touch_button_check() {
   
   if( touch1state && !prevtouch1state ){    
     Serial.println("Touch 1 Pressed");
-    esp_avrc_ct_send_passthrough_cmd(transaction_label, ESP_AVRC_PT_CMD_PLAY, ESP_AVRC_PT_CMD_STATE_PRESSED);
+    SpeakerBT.remoteControl(transaction_label, ESP_AVRC_PT_CMD_PLAY, ESP_AVRC_PT_CMD_STATE_PRESSED);
   }else if( !touch1state && prevtouch1state ){    
     Serial.println("Touch 1 Released");
-    esp_avrc_ct_send_passthrough_cmd(transaction_label, ESP_AVRC_PT_CMD_PLAY, ESP_AVRC_PT_CMD_STATE_RELEASED);
+    SpeakerBT.remoteControl(transaction_label, ESP_AVRC_PT_CMD_PLAY, ESP_AVRC_PT_CMD_STATE_RELEASED);
   }
 
   if( touch2state && !prevtouch2state ){    
     Serial.println("Touch 2 Pressed");
-    esp_avrc_ct_send_passthrough_cmd(transaction_label, ESP_AVRC_PT_CMD_STOP, ESP_AVRC_PT_CMD_STATE_PRESSED);
+    SpeakerBT.remoteControl(transaction_label, ESP_AVRC_PT_CMD_STOP, ESP_AVRC_PT_CMD_STATE_PRESSED);
   }else if( !touch2state && prevtouch2state ){    
     Serial.println("Touch 2 Released");
-    esp_avrc_ct_send_passthrough_cmd(transaction_label, ESP_AVRC_PT_CMD_STOP, ESP_AVRC_PT_CMD_STATE_RELEASED);
+    SpeakerBT.remoteControl(transaction_label, ESP_AVRC_PT_CMD_STOP, ESP_AVRC_PT_CMD_STATE_RELEASED);
   }
 
   prevtouch1state = touch1state;
