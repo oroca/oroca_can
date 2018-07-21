@@ -8,7 +8,7 @@ And you add library file ( libesp_codec.a  and libesp-aac.a ) at Arduino15\packa
 I attach  libray ( libesp_codec.a  and libesp-aac.a ) at platform folder.   
 ```
 *3. You set your value at  translate_device_example.c .  
-'```bash
+```bash
 #define CONFIG_WIFI_SSID "G6"  // set your value  
 #define CONFIG_WIFI_PASSWORD "555555555"  // set your value  
 #define CONFIG_GOOGLE_API_KEY "djskljgkjagiAjdkajgkAdjkfjkadsjgijoag"  // set your value  
